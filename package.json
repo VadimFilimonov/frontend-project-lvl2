@@ -1,0 +1,22 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/VadimFilimonov/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/VadimFilimonov/frontend-project-lvl2/actions)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VadimFilimonov/frontend-project-lvl2.git"
+  },
+  "keywords": [
+    "hexlet"
+  ],
+  "author": "Vadim Filimonov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VadimFilimonov/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/VadimFilimonov/frontend-project-lvl2#readme"
+}
