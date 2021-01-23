@@ -1,3 +1,5 @@
+const has = Object.prototype.hasOwnProperty;
+
 const gendiff = (json1, json2) => {
   const result = [];
 
@@ -6,9 +8,9 @@ const gendiff = (json1, json2) => {
   const uniqueKeys = [...new Set(sortedKeys)];
 
   uniqueKeys.forEach((key) => {
-    if (!json1.hasOwnProperty(key)) {
+    if (!has.call(json1, key)) {
       result.push(`+ ${key}: ${json2[key]}`);
-    } else if (!json2.hasOwnProperty(key)) {
+    } else if (!has.call(json2, key)) {
       result.push(`- ${key}: ${json1[key]}`);
     } else if (json1[key] !== json2[key]) {
       result.push(`- ${key}: ${json1[key]}`);
