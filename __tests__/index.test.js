@@ -1,4 +1,4 @@
-import genDiff from '../index';
+import genDiff from '../src/index';
 
 test('Flat diff is correct', () => {
   const json1 = {
