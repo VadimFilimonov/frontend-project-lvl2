@@ -2,7 +2,10 @@ install:
 	npm install
 
 test:
-	NODE_OPTIONS=--experimental-vm-modules npx jest
+	npx -n --experimental-vm-modules jest
+
+test-coverage:
+	npx -n --experimental-vm-modules jest --collect-coverage
 
 lint:
 	npx eslint ./{src,bin}/**/*.js
