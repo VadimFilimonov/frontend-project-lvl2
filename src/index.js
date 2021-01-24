@@ -1,7 +1,7 @@
 const has = Object.prototype.hasOwnProperty;
 
 const gendiff = (json1, json2) => {
-  const result = [];
+  const diffs = [];
 
   const keys = [...Object.keys(json1), ...Object.keys(json2)];
   const sortedKeys = keys.sort();
@@ -9,22 +9,18 @@ const gendiff = (json1, json2) => {
 
   uniqueKeys.forEach((key) => {
     if (!has.call(json1, key)) {
-      result.push(`+ ${key}: ${json2[key]}`);
+      diffs.push(`  + ${key}: ${json2[key]}`);
     } else if (!has.call(json2, key)) {
-      result.push(`- ${key}: ${json1[key]}`);
+      diffs.push(`  - ${key}: ${json1[key]}`);
     } else if (json1[key] !== json2[key]) {
-      result.push(`- ${key}: ${json1[key]}`);
-      result.push(`+ ${key}: ${json2[key]}`);
+      diffs.push(`  - ${key}: ${json1[key]}`);
+      diffs.push(`  + ${key}: ${json2[key]}`);
     } else {
-      result.push(`  ${key}: ${json1[key]}`);
+      diffs.push(`    ${key}: ${json1[key]}`);
     }
   });
 
-  return `
-  {
-    ${result.join('\n    ')}
-  }
-  `;
+  return ['{', ...diffs, '}'].join('\n');
 };
 
 export default gendiff;

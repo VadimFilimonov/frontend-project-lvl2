@@ -1,26 +1,25 @@
+/* eslint-disable no-underscore-dangle */
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import genDiff from '../src/index';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8', () => {});
+
+let expected;
+
+beforeAll(async () => {
+  expected = readFile('expected.txt');
+});
+
 test('Flat diff is correct', () => {
-  const json1 = {
-    "host": "hexlet.io",
-    "timeout": 50,
-    "proxy": "123.234.53.22",
-    "follow": false
-  };
-  const json2 = {
-    "timeout": 20,
-    "verbose": true,
-    "host": "hexlet.io"
-  };
-  const expected = `
-  {
-    - follow: false
-      host: hexlet.io
-    - proxy: 123.234.53.22
-    - timeout: 50
-    + timeout: 20
-    + verbose: true
-  }
-  `;
+  const file1 = readFile('file1.json');
+  const file2 = readFile('file2.json');
+  const json1 = JSON.parse(file1);
+  const json2 = JSON.parse(file2);
   expect(genDiff(json1, json2)).toEqual(expected);
 });
