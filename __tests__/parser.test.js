@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import path from 'path';
 import { fileURLToPath } from 'url';
-import genDiff from '../src/index';
 import parser from '../src/parser';
 import readFile from '../src/readFile';
 
@@ -13,14 +12,17 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 let expected;
 
 beforeAll(async () => {
-  const filepath = getFixturePath('expected.txt');
-  expected = readFile(filepath);
+  const filepath = getFixturePath('file1.json');
+  const file = readFile(filepath);
+  expected = JSON.parse(file);
 });
 
-test('Flat diff is correct', () => {
-  const filepath1 = getFixturePath('file1.json');
-  const filepath2 = getFixturePath('file2.json');
-  const json1 = parser(filepath1);
-  const json2 = parser(filepath2);
-  expect(genDiff(json1, json2)).toEqual(expected);
+test('JSON is correct', () => {
+  const filepath = getFixturePath('file1.json');
+  expect(parser(filepath)).toEqual(expected);
+});
+
+test('YAML is correct', () => {
+  const filepath = getFixturePath('file1.yml');
+  expect(parser(filepath)).toEqual(expected);
 });
