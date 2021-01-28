@@ -1,6 +1,6 @@
 import yaml from 'js-yaml';
 import path from 'path';
-import readFile from './readFile';
+import readFile from './readFile.js';
 
 const parseJSON = (file) => JSON.parse(file);
 
