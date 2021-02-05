@@ -17,7 +17,7 @@ beforeAll(async () => {
   expected = readFile(filepath);
 });
 
-test('Flat diff is correct', () => {
+test('Diff is correct', () => {
   const filepath1 = getFixturePath('file1.json');
   const filepath2 = getFixturePath('file2.json');
   const json1 = parser(filepath1);
