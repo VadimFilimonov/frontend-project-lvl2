@@ -1,72 +1,61 @@
 import formatter from './formatter';
+import { has, isObject } from './utilities';
 
-const isObject = (arg) => arg && typeof arg === 'object';
-
-const has = Object.prototype.hasOwnProperty;
-
-const gendiff = (object1, object2, depth = 1) => {
+const gendiff = (object1, object2) => {
   const keys = [...Object.keys(object1), ...Object.keys(object2)];
   const sortedKeys = keys.sort();
   const uniqueKeys = [...new Set(sortedKeys)];
 
   const tree = uniqueKeys.map((key) => {
     let status;
-    let value;
-    let oldValue;
-    let children;
 
     if (!has.call(object1, key)) {
       status = 'added';
     } else if (!has.call(object2, key)) {
       status = 'deleted';
-    } else if (object1[key] !== object2[key]) {
-      status = 'changed';
-    } else {
+    } else if (JSON.stringify(object1[key]) === JSON.stringify(object2[key])) {
       status = 'unchanged';
+    } else {
+      status = 'changed';
     }
 
     switch (status) {
       case 'added':
-        if (isObject(object2[key])) {
-          value = 'nested';
-          children = [object2[key]];
-        } else {
-          value = object2[key];
-        }
-        break;
+        return {
+          key,
+          status,
+          value: object2[key],
+        };
       case 'deleted':
-        value = object1[key];
-        if (isObject(object1[key])) {
-          value = 'nested';
-          children = [object1[key]];
-        } else {
-          value = object1[key];
-        }
-        break;
-      case 'changed':
-        if (isObject(object2[key])) {
-          value = 'nested';
-          children = gendiff(object1[key], object2[key], depth + 1);
-        } else {
-          value = object2[key];
-          oldValue = object1[key];
-        }
-        break;
+        return {
+          key,
+          status,
+          value: object1[key],
+        };
       case 'unchanged':
-        value = object1[key];
-        break;
+        return {
+          key,
+          status,
+          value: object1[key],
+        };
+      case 'changed':
+        if (isObject(object1[key]) && isObject(object2[key])) {
+          return {
+            key,
+            status,
+            value: 'nested',
+            children: gendiff(object1[key], object2[key]),
+          };
+        }
+        return {
+          key,
+          status,
+          value: object2[key],
+          oldValue: object1[key],
+        };
       default:
-        break;
+        throw new Error('Unknown status');
     }
-
-    return {
-      key,
-      depth,
-      value,
-      oldValue,
-      status,
-      children,
-    };
   });
 
   return tree;
