@@ -1,4 +1,4 @@
-import { stringify } from './utilities.js';
+import { stringify } from '../utilities.js';
 
 const spaceCount = 4;
 
@@ -8,7 +8,7 @@ const findSymbol = (status) => {
   return ' ';
 };
 
-export const stylish = (tree) => {
+export default (tree) => {
   const iter = (node, depth) => {
     const indentSize = depth * spaceCount;
     const currentIndent = ' '.repeat(indentSize - 2);
@@ -22,7 +22,8 @@ export const stylish = (tree) => {
         return `${currentIndent}${symbol} ${key}: ${stringify(value, depth + 1)}`.trimEnd();
       }
       if (value === 'nested') {
-        return `${currentIndent}  ${key}: ${iter(children, depth + 1)}`.trimEnd();
+        const symbol = ' ';
+        return `${currentIndent}${symbol} ${key}: ${iter(children, depth + 1)}`.trimEnd();
       }
       const deletedRow = `${currentIndent}- ${key}: ${stringify(oldValue, depth + 1)}`.trimEnd();
       const addedRow = `${currentIndent}+ ${key}: ${stringify(value, depth + 1)}`.trimEnd();
@@ -37,11 +38,4 @@ export const stylish = (tree) => {
   };
 
   return iter(tree, 1);
-};
-
-export default (tree, format = 'stylish') => {
-  if (format === 'stylish') {
-    return stylish(tree);
-  }
-  return 'Unknown format';
 };
