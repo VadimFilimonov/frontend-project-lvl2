@@ -61,7 +61,7 @@ const gendiff = (object1, object2) => {
   return tree;
 };
 
-export default (json1, json2, formatType) => {
+export default (json1, json2, formatName) => {
   const tree = gendiff(json1, json2);
-  return formatter(tree, formatType);
+  return formatter(tree, formatName);
 };
