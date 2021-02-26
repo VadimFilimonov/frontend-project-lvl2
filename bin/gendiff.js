@@ -5,10 +5,10 @@ import parser from '../src/parser.js';
 
 const { program } = commander;
 
-const run = (filepath1, filepath2) => {
+const run = (filepath1, filepath2, options) => {
   const json1 = parser(filepath1);
   const json2 = parser(filepath2);
-  const diff = gendiff(json1, json2);
+  const diff = gendiff(json1, json2, options.format);
   console.log(diff);
 };
 
@@ -17,7 +17,7 @@ program
   .arguments('<filepath1> <filepath2>')
   .usage('[options] <filepath1> <filepath2>')
   .description('Compares two configuration files and shows a difference.')
-  .option('-f, --format [type]', 'output format')
+  .option('-f, --format [type]', 'output format', 'stylish')
   .action(run);
 
 program.parse(process.argv);

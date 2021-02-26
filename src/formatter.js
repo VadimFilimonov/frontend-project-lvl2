@@ -8,7 +8,7 @@ const findSymbol = (status) => {
   return ' ';
 };
 
-const stylish = (tree) => {
+export const stylish = (tree) => {
   const iter = (node, depth) => {
     const indentSize = depth * spaceCount;
     const currentIndent = ' '.repeat(indentSize - 2);
@@ -39,4 +39,9 @@ const stylish = (tree) => {
   return iter(tree, 1);
 };
 
-export default (tree) => stylish(tree);
+export default (tree, format = 'stylish') => {
+  if (format === 'stylish') {
+    return stylish(tree);
+  }
+  return 'Unknown format';
+};
