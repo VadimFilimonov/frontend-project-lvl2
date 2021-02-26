@@ -1,5 +1,5 @@
-import formatter from './formatter';
-import { has, isObject } from './utilities';
+import formatter from './formatter.js';
+import { has, isObject } from './utilities.js';
 
 const gendiff = (object1, object2) => {
   const keys = [...Object.keys(object1), ...Object.keys(object2)];
