@@ -2,7 +2,7 @@ import json from './json.js';
 import plain from './plain.js';
 import stylish from './stylish.js';
 
-export default (tree, formatName = 'stylish') => {
+export default (tree, formatName) => {
   if (formatName === 'stylish') {
     return stylish(tree);
   }
@@ -12,5 +12,5 @@ export default (tree, formatName = 'stylish') => {
   if (formatName === 'json') {
     return json(tree);
   }
-  return 'Unknown format';
+  return 'This format type is not supported';
 };
