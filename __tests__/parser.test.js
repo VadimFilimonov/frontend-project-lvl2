@@ -9,20 +9,15 @@ const __dirname = path.dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-let expected;
-
-beforeAll(async () => {
-  const filepath = getFixturePath('file1.json');
-  const file = readFile(filepath);
-  expected = JSON.parse(file);
-});
-
 test('JSON is correct', () => {
   const filepath = getFixturePath('file1.json');
+  const expected = JSON.parse(readFile(filepath));
   expect(parser(filepath)).toEqual(expected);
 });
 
 test('YAML is correct', () => {
   const filepath = getFixturePath('file1.yml');
+  const filepathExpected = getFixturePath('file1.json');
+  const expected = JSON.parse(readFile(filepathExpected));
   expect(parser(filepath)).toEqual(expected);
 });
