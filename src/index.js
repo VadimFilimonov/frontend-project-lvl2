@@ -1,10 +1,11 @@
+import orderBy from 'lodash.orderby';
 import formatter from './formatters/index.js';
 import parser from './parser.js';
 import { has, isObject } from './utilities.js';
 
 const gendiff = (object1, object2) => {
   const keys = [...Object.keys(object1), ...Object.keys(object2)];
-  const sortedKeys = keys.concat().sort();
+  const sortedKeys = orderBy(keys);
   const uniqueKeys = [...new Set(sortedKeys)];
 
   const tree = uniqueKeys.map((key) => {
