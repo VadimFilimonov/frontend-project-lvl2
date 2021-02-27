@@ -1,48 +1,46 @@
 import _ from 'lodash';
 
-const diffTree = (object1, object2) => {
-  const keys = _.union(_.keys(object1), _.keys(object2));
-  const sortedKeys = _.orderBy(keys);
+const generateDiffTree = (data1, data2) => {
+  const uniqueKeys = _.union(_.keys(data1), _.keys(data2));
+  const sortedKeys = _.sortBy(uniqueKeys);
 
-  const tree = sortedKeys.map((key) => {
-    if (!_.has(object1, key)) {
+  return sortedKeys.map((key) => {
+    if (!_.has(data1, key)) {
       return {
         key,
+        value: data2[key],
         status: 'added',
-        value: object2[key],
       };
     }
-    if (!_.has(object2, key)) {
+    if (!_.has(data2, key)) {
       return {
         key,
+        value: data1[key],
         status: 'deleted',
-        value: object1[key],
       };
     }
-    if (JSON.stringify(object1[key]) === JSON.stringify(object2[key])) {
+    if (_.isEqual(data1[key], data2[key])) {
       return {
         key,
+        value: data1[key],
         status: 'unchanged',
-        value: object1[key],
       };
     }
-    if (_.isObject(object1[key]) && _.isObject(object2[key])) {
+    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
       return {
         key,
-        status: 'changed',
         value: 'nested',
-        children: diffTree(object1[key], object2[key]),
+        children: generateDiffTree(data1[key], data2[key]),
+        status: 'changed',
       };
     }
     return {
       key,
+      value: data2[key],
+      oldValue: data1[key],
       status: 'changed',
-      value: object2[key],
-      oldValue: object1[key],
     };
   });
-
-  return tree;
 };
 
-export default diffTree;
+export default generateDiffTree;
