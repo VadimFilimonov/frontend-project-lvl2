@@ -1,6 +1,6 @@
 import stringify from '../stringify.js';
 
-const spaceCount = 4;
+const SPACE_COUNT = 4;
 
 const findSymbol = (status) => {
   if (status === 'added') return '+';
@@ -10,9 +10,9 @@ const findSymbol = (status) => {
 
 export default (tree) => {
   const iter = (node, depth) => {
-    const indentSize = depth * spaceCount;
+    const indentSize = depth * SPACE_COUNT;
     const currentIndent = ' '.repeat(indentSize - 2);
-    const bracketIndent = ' '.repeat(indentSize - spaceCount);
+    const bracketIndent = ' '.repeat(indentSize - SPACE_COUNT);
 
     const lines = node.map(({
       key, value, oldValue, status, children,
