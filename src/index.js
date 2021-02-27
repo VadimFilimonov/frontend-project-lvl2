@@ -8,55 +8,41 @@ const gendiff = (object1, object2) => {
   const uniqueKeys = [...new Set(sortedKeys)];
 
   const tree = uniqueKeys.map((key) => {
-    let status;
-
     if (!has.call(object1, key)) {
-      status = 'added';
-    } else if (!has.call(object2, key)) {
-      status = 'deleted';
-    } else if (JSON.stringify(object1[key]) === JSON.stringify(object2[key])) {
-      status = 'unchanged';
-    } else {
-      status = 'changed';
+      return {
+        key,
+        status: 'added',
+        value: object2[key],
+      };
     }
-
-    switch (status) {
-      case 'added':
-        return {
-          key,
-          status,
-          value: object2[key],
-        };
-      case 'deleted':
-        return {
-          key,
-          status,
-          value: object1[key],
-        };
-      case 'unchanged':
-        return {
-          key,
-          status,
-          value: object1[key],
-        };
-      case 'changed':
-        if (isObject(object1[key]) && isObject(object2[key])) {
-          return {
-            key,
-            status,
-            value: 'nested',
-            children: gendiff(object1[key], object2[key]),
-          };
-        }
-        return {
-          key,
-          status,
-          value: object2[key],
-          oldValue: object1[key],
-        };
-      default:
-        throw new Error('Unknown status');
+    if (!has.call(object2, key)) {
+      return {
+        key,
+        status: 'deleted',
+        value: object1[key],
+      };
     }
+    if (JSON.stringify(object1[key]) === JSON.stringify(object2[key])) {
+      return {
+        key,
+        status: 'unchanged',
+        value: object1[key],
+      };
+    }
+    if (isObject(object1[key]) && isObject(object2[key])) {
+      return {
+        key,
+        status: 'changed',
+        value: 'nested',
+        children: gendiff(object1[key], object2[key]),
+      };
+    }
+    return {
+      key,
+      status: 'changed',
+      value: object2[key],
+      oldValue: object1[key],
+    };
   });
 
   return tree;
