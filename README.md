@@ -155,3 +155,7 @@ file2.json
 > Next examples have same json files
 
 [![asciicast](https://asciinema.org/a/C73uM0p5AKiIpzlOqamFWlIfO.svg)](https://asciinema.org/a/C73uM0p5AKiIpzlOqamFWlIfO)
+
+### Plain format
+
+[![asciicast](https://asciinema.org/a/FRgMaymu03Dm6BiS8zOWYGJVH.svg)](https://asciinema.org/a/FRgMaymu03Dm6BiS8zOWYGJVH)
