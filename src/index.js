@@ -4,7 +4,7 @@ import { has, isObject } from './utilities.js';
 
 const gendiff = (object1, object2) => {
   const keys = [...Object.keys(object1), ...Object.keys(object2)];
-  const sortedKeys = [...keys].sort();
+  const sortedKeys = keys.concat().sort();
   const uniqueKeys = [...new Set(sortedKeys)];
 
   const tree = uniqueKeys.map((key) => {
