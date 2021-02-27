@@ -61,3 +61,24 @@ file2.json
 ```
 
 [![asciicast](https://asciinema.org/a/2qiRWpoKwv7fqI8epcvUt3OJR.svg)](https://asciinema.org/a/2qiRWpoKwv7fqI8epcvUt3OJR)
+
+### Flat YML
+
+file1.yml
+
+```yml
+host: hexlet.io,
+timeout: 50,
+proxy: 123.234.53.22,
+follow: false
+```
+
+file2.yml
+
+```yml
+timeout: 20,
+verbose: true,
+host: hexlet.io
+```
+
+[![asciicast](https://asciinema.org/a/ZjiA9JK95r52QoteQAM6VZmYN.svg)](https://asciinema.org/a/ZjiA9JK95r52QoteQAM6VZmYN)
