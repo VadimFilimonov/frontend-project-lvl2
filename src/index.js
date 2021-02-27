@@ -1,4 +1,5 @@
 import formatter from './formatters/index.js';
+import parser from './parser.js';
 import { has, isObject } from './utilities.js';
 
 const gendiff = (object1, object2) => {
@@ -61,7 +62,9 @@ const gendiff = (object1, object2) => {
   return tree;
 };
 
-export default (json1, json2, formatName) => {
+export default (filepath1, filepath2, formatName) => {
+  const json1 = parser(filepath1);
+  const json2 = parser(filepath2);
   const tree = gendiff(json1, json2);
   return formatter(tree, formatName);
 };

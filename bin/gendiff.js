@@ -1,14 +1,11 @@
 #!/usr/bin/env node
 import commander from 'commander';
 import gendiff from '../src/index.js';
-import parser from '../src/parser.js';
 
 const { program } = commander;
 
 const run = (filepath1, filepath2, options) => {
-  const json1 = parser(filepath1);
-  const json2 = parser(filepath2);
-  const diff = gendiff(json1, json2, options.format);
+  const diff = gendiff(filepath1, filepath2, options.format);
   console.log(diff);
 };
 
