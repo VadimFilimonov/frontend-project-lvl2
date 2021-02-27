@@ -15,6 +15,5 @@ program
   .usage('[options] <filepath1> <filepath2>')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'output format', 'stylish')
-  .action(run);
-
-program.parse(process.argv);
+  .action(run)
+  .parse(process.argv);
