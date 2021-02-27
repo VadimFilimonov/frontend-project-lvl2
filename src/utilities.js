@@ -1,7 +1,3 @@
-export const isObject = (arg) => arg && typeof arg === 'object';
-
-export const has = Object.prototype.hasOwnProperty;
-
 export const stringify = (value, startDepth = 1, spaceCount = 4) => {
   const iter = (currentValue, depth) => {
     if (typeof currentValue !== 'object') {
@@ -29,3 +25,5 @@ export const stringify = (value, startDepth = 1, spaceCount = 4) => {
 
   return iter(value, startDepth);
 };
+
+export default stringify;

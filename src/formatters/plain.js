@@ -1,4 +1,4 @@
-import { isObject } from '../utilities.js';
+import _ from 'lodash';
 
 const processValue = (value) => {
   if (typeof value === 'string') {
@@ -16,12 +16,12 @@ export default (tree) => {
     if (value === 'nested') {
       return iter(children, newKeys);
     }
-    const addedValue = isObject(value) ? '[complex value]' : processValue(value);
+    const addedValue = _.isObject(value) ? '[complex value]' : processValue(value);
     if (status === 'added') {
       return `Property '${keyPath}' was added with value: ${addedValue}`;
     }
     if (status === 'changed') {
-      const removedValue = isObject(oldValue) ? '[complex value]' : processValue(oldValue);
+      const removedValue = _.isObject(oldValue) ? '[complex value]' : processValue(oldValue);
       return `Property '${keyPath}' was updated. From ${removedValue} to ${addedValue}`;
     }
     if (status === 'deleted') {

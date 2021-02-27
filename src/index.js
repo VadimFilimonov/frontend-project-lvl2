@@ -1,22 +1,21 @@
-import orderBy from 'lodash.orderby';
+import _ from 'lodash';
 import formatter from './formatters/index.js';
 import parser from './parser.js';
-import { has, isObject } from './utilities.js';
 
 const gendiff = (object1, object2) => {
-  const keys = [...Object.keys(object1), ...Object.keys(object2)];
-  const sortedKeys = orderBy(keys);
-  const uniqueKeys = [...new Set(sortedKeys)];
+  const keys = _.union(_.keys(object1), _.keys(object2));
+  const uniqueKeys = _.uniq(keys);
+  const sortedKeys = _.orderBy(uniqueKeys);
 
-  const tree = uniqueKeys.map((key) => {
-    if (!has.call(object1, key)) {
+  const tree = sortedKeys.map((key) => {
+    if (!_.has(object1, key)) {
       return {
         key,
         status: 'added',
         value: object2[key],
       };
     }
-    if (!has.call(object2, key)) {
+    if (!_.has(object2, key)) {
       return {
         key,
         status: 'deleted',
@@ -30,7 +29,7 @@ const gendiff = (object1, object2) => {
         value: object1[key],
       };
     }
-    if (isObject(object1[key]) && isObject(object2[key])) {
+    if (_.isObject(object1[key]) && _.isObject(object2[key])) {
       return {
         key,
         status: 'changed',
