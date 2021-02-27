@@ -34,3 +34,30 @@ Options:
 `<filepath>` - path to json or yaml file
 
 [![asciicast](https://asciinema.org/a/SHE7Fbi3crc3PSSzjcAYV4kx3.svg)](https://asciinema.org/a/SHE7Fbi3crc3PSSzjcAYV4kx3)
+
+## Examples
+
+### Flat JSON
+
+file1.json
+
+```json
+{
+  "host": "hexlet.io",
+  "timeout": 50,
+  "proxy": "123.234.53.22",
+  "follow": false
+}
+```
+
+file2.json
+
+```json
+{
+  "timeout": 20,
+  "verbose": true,
+  "host": "hexlet.io"
+}
+```
+
+[![asciicast](https://asciinema.org/a/2qiRWpoKwv7fqI8epcvUt3OJR.svg)](https://asciinema.org/a/2qiRWpoKwv7fqI8epcvUt3OJR)
