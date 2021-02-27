@@ -4,8 +4,7 @@ import parser from './parser.js';
 
 const gendiff = (object1, object2) => {
   const keys = _.union(_.keys(object1), _.keys(object2));
-  const uniqueKeys = _.uniq(keys);
-  const sortedKeys = _.orderBy(uniqueKeys);
+  const sortedKeys = _.orderBy(keys);
 
   const tree = sortedKeys.map((key) => {
     if (!_.has(object1, key)) {
