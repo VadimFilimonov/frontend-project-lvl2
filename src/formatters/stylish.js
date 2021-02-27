@@ -19,14 +19,14 @@ export default (tree) => {
     }) => {
       if (status !== 'changed') {
         const symbol = findSymbol(status);
-        return `${currentIndent}${symbol} ${key}: ${stringify(value, depth + 1)}`.trimEnd();
+        return `${currentIndent}${symbol} ${key}: ${stringify(value, depth + 1)}`;
       }
       if (value === 'nested') {
         const symbol = ' ';
-        return `${currentIndent}${symbol} ${key}: ${iter(children, depth + 1)}`.trimEnd();
+        return `${currentIndent}${symbol} ${key}: ${iter(children, depth + 1)}`;
       }
-      const deletedRow = `${currentIndent}- ${key}: ${stringify(oldValue, depth + 1)}`.trimEnd();
-      const addedRow = `${currentIndent}+ ${key}: ${stringify(value, depth + 1)}`.trimEnd();
+      const deletedRow = `${currentIndent}- ${key}: ${stringify(oldValue, depth + 1)}`;
+      const addedRow = `${currentIndent}+ ${key}: ${stringify(value, depth + 1)}`;
       return [deletedRow, addedRow].join('\n');
     });
 
