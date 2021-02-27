@@ -1,4 +1,4 @@
-export const stringify = (value, startDepth = 1, spaceCount = 4) => {
+export default (value, startDepth = 1, spaceCount = 4) => {
   const iter = (currentValue, depth) => {
     if (typeof currentValue !== 'object') {
       return currentValue.toString();
@@ -25,5 +25,3 @@ export const stringify = (value, startDepth = 1, spaceCount = 4) => {
 
   return iter(value, startDepth);
 };
-
-export default stringify;

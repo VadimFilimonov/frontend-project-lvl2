@@ -1,4 +1,4 @@
-import { stringify } from '../utilities.js';
+import stringify from '../stringify.js';
 
 const spaceCount = 4;
 
