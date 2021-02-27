@@ -159,3 +159,7 @@ file2.json
 ### Plain format
 
 [![asciicast](https://asciinema.org/a/FRgMaymu03Dm6BiS8zOWYGJVH.svg)](https://asciinema.org/a/FRgMaymu03Dm6BiS8zOWYGJVH)
+
+### JSON format
+
+[![asciicast](https://asciinema.org/a/dpFO8fxrrA72T1aswCnTz5UhD.svg)](https://asciinema.org/a/dpFO8fxrrA72T1aswCnTz5UhD)
